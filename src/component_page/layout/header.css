@@ -1,0 +1,158 @@
+body{
+    background-color: #000000;
+    color           : white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    display: inline-block;
+    background-color: #000000;
+    /* Màu nền mặc định cho menu chính */
+    border-radius: 5px;
+    transition: background-color 0s;
+    font-size: 18px;
+}
+
+.menu-item a:hover {
+    background-color: #0E0F11;
+    /* Màu nền khi hover cho menu chính */
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000000;
+    /* Màu nền cho submenu */
+    display: none;
+    border-radius: 5px;
+    min-width: 200px;
+    z-index: 1;
+}
+
+.submenu-item {
+    position: relative;
+    z-index: 1;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+.submenu li a {
+    width: 100%;
+    padding: 10px;
+    display: block;
+    /* Đảm bảo thẻ a chiếm toàn bộ chiều rộng */
+    color: #fff;
+    /* Màu chữ cho thẻ a trong submenu */
+    background-color: #000000;
+    /* Màu nền mặc định cho thẻ a trong submenu */
+    transition: background-color 0s;
+    /* Hiệu ứng chuyển động */
+}
+
+.submenu li:hover {
+    background-color: #0E0F11;
+    /* Màu nền khi hover cho li trong submenu */
+}
+
+.submenu li a:hover {
+    background-color: #0E0F11;
+    /* Màu nền khi hover cho a trong submenu */
+}
+
+/* Sub-submenu CSS */
+.sub-submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #0d0d0e;
+    /* Màu nền cho sub-submenu */
+    display: none;
+    border-radius: 5px;
+    min-width: 200px;
+    z-index: 1;
+}
+
+.sub-submenu li a {
+    padding: 10px;
+    display: block;
+    color: #fff;
+    /* Màu chữ cho thẻ a trong sub-submenu */
+    background-color: #0d0d0e;
+    /* Màu nền mặc định cho thẻ a trong sub-submenu */
+    transition: background-color 0s;
+    /* Hiệu ứng chuyển động cho sub-submenu items */
+}
+
+.sub-submenu li:hover {
+    background-color: #1b1b1c;
+    /* Màu nền khi hover cho li trong sub-submenu */
+}
+
+.sub-submenu li a:hover {
+    background-color: #1b1b1c;
+}
+
+.menu-item:hover .submenu {
+    display: block;
+}
+
+.submenu-item:hover .sub-submenu {
+    display: block;
+}
+
+.submenu li a {
+    width: 100%;
+}
+
+.submenu li {
+    background-color: #000000;
+}
+
+.sub-submenu li {
+    background-color: #0d0d0e;
+}
+
+.submenu-item:hover>a {
+    background-color: #0E0F11;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 80px;
+}
+
+.logo {
+    width: 30%;
+    float: left;
+    background-color: #00ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-container {
+    width: 70%;
+    float: right;
+    justify-content: center;
+}
