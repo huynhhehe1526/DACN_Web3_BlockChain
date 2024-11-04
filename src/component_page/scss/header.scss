@@ -24,7 +24,7 @@ body {
         display        : flex;
         justify-content: center;
         line-height    : 40px;
-        width          : 70%;
+        width          : 72%;
         float          : right;
 
         ul {
@@ -54,6 +54,7 @@ body {
                             &:hover {
                                 color           : orange;
                                 background-color: #0E0F11;
+                                cursor          : pointer;
                             }
                         }
 

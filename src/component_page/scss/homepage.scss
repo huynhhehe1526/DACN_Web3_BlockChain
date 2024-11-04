@@ -5,6 +5,20 @@
      background: linear-gradient(135deg, #3d0149, #0b0850 50%, #000000);
      mask-image: linear-gradient(to bottom, hsl(0 0% 0% / 1) 0%, hsl(0 0% 0% / 1) 90%, hsl(0 0% 0% / 0));
 
+     .btn-wallet,
+     .btn-connect-wallet {
+         background-color: #fff;
+         color           : #000000;
+         border-radius   : 9999px;
+         margin-right    : 50px;
+         font-weight     : bold;
+         width           : 206px;
+
+         &:hover {
+             color: #fff;
+         }
+     }
+
      h1 {
          font-weight            : bold;
          font-size              : 50px;
@@ -125,9 +139,6 @@
      grid-gap             : 1.5rem;
      grid-template-columns: repeat(1, minmax(0, 1fr));
      margin               : 10rem;
-
-
-
 
      .css-1vrsic3 {
          display               : -webkit-box;
@@ -310,8 +321,10 @@
                      align-items        : center;
                      justify-items      : center;
                      gap                : 0.5rem;
+                     text-align         : justify;
 
                      .css-jqypxo {
+                         display       : flex;
                          color         : #AEAEB2;
                          font-size     : 0.875rem;
                          font-weight   : 400;
@@ -1034,6 +1047,8 @@
          background             : linear-gradient(90deg, #ff00c8, #00ffff);
          -webkit-background-clip: text;
          -webkit-text-fill-color: transparent;
+         font-weight            : bold;
+         font-size              : 52px;
      }
 
      .css-1wg1opb {

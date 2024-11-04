@@ -1,10 +1,10 @@
 import React from "react";
-const LoginPage = () => {
+const WalletPage = () => {
     return (
         <div>
-            LoginPage
+            WalletPage
         </div>
     )
 }
 
-export default LoginPage;
+export default WalletPage;

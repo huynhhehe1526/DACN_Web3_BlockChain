@@ -35,14 +35,7 @@ const Formjsonschema = () => {
     const [formData, setFormData] = useState(null);
     console.log('Check form data state: ', formData)
     return (
-        // <Form
-        //     schema={schema}
-        //     formData={formData}
-        //     validator={validator}
-        //     onChange={log('changed')}
-        //     onSubmit={log('submitted')}
-        //     onError={log('errors')}
-        // />
+        
         <Form
             schema={{ type: 'string' }}
             formData={formData}

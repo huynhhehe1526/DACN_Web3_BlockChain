@@ -1,7 +1,14 @@
 import React from "react";
-import '../layout/footer.scss';
+import '../scss/footer.scss';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Footer = () => {
+    const navigate = useNavigate();
+    const redirectHomepage = () => {
+        navigate('/');
+    }
     return (
         <>
             <React.Fragment>
@@ -9,12 +16,10 @@ const Footer = () => {
                     <div className='footer-left'>
                         <h2>Thông tin chung</h2>
                         <ul>
-                            <li><a >Trang chủ</a></li>
+                            <li><a onClick={() => redirectHomepage()}>Trang chủ</a></li>
                             <li><a >Giới thiệu</a></li>
                             <li>
-                                <a
-                                    onClick={() => this.redirectToRegular()}
-                                >
+                                <a >
                                     Quy định
                                 </a>
                             </li>

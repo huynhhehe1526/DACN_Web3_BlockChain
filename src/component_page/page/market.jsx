@@ -1,10 +1,10 @@
 import React from "react";
-const LoginPage = () => {
+const MarketPage = () => {
     return (
         <div>
-            LoginPage
+            MarketPage
         </div>
     )
 }
 
-export default LoginPage;
+export default MarketPage;
