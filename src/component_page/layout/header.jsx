@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import '../scss/header.scss';
 import { useNavigate } from 'react-router-dom';
+import logo_VietNam from '../../assets/image/logo_VietNam.png';
+import logo_nuocAnh from '../../assets/image/logo_nuocAnh.png';
+import { useTranslation } from '../../lang/LanguageProvider';
 
 const Header = () => {
     const navigate = useNavigate();
+    const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+    const { i18n, switchLanguage } = useTranslation();
+
     const redirectMarket = () => {
         navigate("/market")
     }
@@ -21,6 +27,15 @@ const Header = () => {
         navigate("/login")
     }
 
+    const handleChangeLanguage = () => {
+        setShowLanguageOptions(true); 
+      };
+    
+      const handleLanguageSelect = locale => {
+        switchLanguage(locale);
+        setShowLanguageOptions(false);
+      };
+
     return (
         <>
             <div className="header">
@@ -28,37 +43,35 @@ const Header = () => {
                 <nav className="menu-container">
                     <ul className="menu">
                         <li className="menu-item">
-                            <a onClick={redirectMarket}>Thị trường</a>
+                        <a onClick={redirectMarket}>{i18n.t('header.market')}</a>
                         </li>
                         <li className="menu-item">
-                            <a onClick={redirectBinance}>Binance</a>
+                            <a onClick={redirectBinance}>{i18n.t('header.binance')}</a>
                         </li>
                         <li className="menu-item">
-                            <a onClick={redirectWallet}>Wallets</a>
+                            <a onClick={redirectWallet}>{i18n.t('header.wallet')}</a>
                         </li>
                         <li className="menu-item">
-                            <a onClick={redirectExchange}>Exchange</a>
+                            <a onClick={redirectExchange}>{i18n.t('header.exchange')}</a>
                         </li>
                         <li className="menu-item">
-                            <a href="#">Development</a>
+                            <a href="#">{i18n.t('header.language')}</a>
                             <ul className="submenu">
                                 <li className="submenu-item">
-                                    <a href="#">Resources</a>
-                                    <ul className="sub-submenu">
+                                    <img className='logo-nation' src={logo_VietNam} alt='Việt Nam'/>
+                                    <a onClick={() => handleLanguageSelect('vi')}>Tiếng Việt</a>
+                                    {/* <ul className="sub-submenu">
                                         <li><a href="#">Docs</a></li>
-                                        <li><a href="#">Templates</a></li>
-                                        <li><a href="#">Guides</a></li>
-                                        <li><a href="#">Guides</a></li>
-                                        <li><a href="#">Guides</a></li>
-                                        <li><a href="#">Guides</a></li>
-                                    </ul>
+                                    </ul> */}
                                 </li>
-                                <li><a href="#">Dev Tools</a></li>
-                                <li><a href="#">SDKs</a></li>
+                                <li className="submenu-item">
+                                    <img className='logo-nation' src={logo_nuocAnh} alt='Anh'/>
+                                    <a onClick={() => handleLanguageSelect('en')}>Tiếng Anh</a>
+                                </li>
                             </ul>
                         </li>
                         <li className="menu-item">
-                            <a onClick={redirectLogin}>Login</a>
+                            <a onClick={redirectLogin}>{i18n.t('header.login')}</a>
                         </li>
                     </ul>
                 </nav>
@@ -68,11 +81,4 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
-
-
 

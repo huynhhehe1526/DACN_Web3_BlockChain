@@ -21,11 +21,11 @@ import {
     Typography
 } from '@mui/material';
 import React, { useState } from 'react';
-import ConnectWalletModal from '../page/connect'; // Import modal component
+import ConnectWalletModal from '../page/connect';
   
   const WalletInterface = () => {
     const [value, setValue] = React.useState('usd');
-    const [isModalOpen, setModalOpen] = useState(false); // State to control modal visibility
+    const [isModalOpen, setModalOpen] = useState(false);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -40,7 +40,7 @@ import ConnectWalletModal from '../page/connect'; // Import modal component
     };
   
     return (
-      <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh' }}>
+      <Box sx={{minHeight: '100vh' }}>
         {/* Navigation Bar */}
         <AppBar position="static" color="transparent" elevation={0}>
           <Container>
@@ -102,7 +102,7 @@ import ConnectWalletModal from '../page/connect'; // Import modal component
               <Grid container spacing={2}>
                 {/* Feature Cards */}
                 <Grid item xs={12} sm={4}>
-                  <Card sx={{ bgcolor: '#6c5ce7', color: 'white' }}>
+                  <Card sx={{ bgcolor: '#6c5ce7', color: '#ddd' }}>
                     <CardContent>
                       <Lock sx={{ fontSize: 40, mb: 2 }} />
                       <Typography>Please backup your wallet</Typography>

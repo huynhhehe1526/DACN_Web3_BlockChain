@@ -5,8 +5,10 @@ import aws from '../../assets/image/aws.png';
 import paradigm from '../../assets/image/paradigm.png';
 import ztx from '../../assets/image/ztx.png';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../lang/LanguageProvider';
 
 const HomePage = () => {
+    const {i18n}  =useTranslation();
     const navigate = useNavigate();
     const redirectWallet = () => {
         navigate("/wallets")
@@ -17,20 +19,20 @@ const HomePage = () => {
     return (
         <>
             <section className="hero-section">
-                <h1 style={{ color: "white" }}>Build theme,
+                <h1 style={{ color: "white" }}>{i18n.t('homepage.title')},
                     <span className='animation-opensource'>
                         react, open-source, web3, blockchain
                     </span>!
                 </h1>
-                <p>Frontend, backend, and onchain tools to build complete web3 apps on every EVM chain.</p>
+                <p>{i18n.t('homepage.description')}</p>
                 <button className='btn-wallet'
                     onClick={redirectWallet}
                 >
-                    Wallet
+                    {i18n.t('button.wallet')}
                 </button>
                 <button className='btn-connect-wallet'
                     onClick={redirectConnectWallet}
-                >Connect Wallet&nbsp;&nbsp;
+                >{i18n.t('button.connectWallet')}&nbsp;&nbsp;
                     <span
                         className="chakra-button__icon css-1hzyiq5">
                         <svg stroke="currentColor" fill="none" strokeWidth="2"
@@ -347,7 +349,7 @@ const HomePage = () => {
 
 
             <section className="solutions-section">
-                <h2>Distribution of Members</h2>
+                <h2>{i18n.t('homepage.titleDetribute')}</h2>
                 <div className="css-1wg1opb">
                     <div className="chakra-linkbox css-uth939">
                         <img alt="" src="https://www.verdict.co.uk/wp-content/uploads/2022/12/Shutterstock_2183804245.jpg"

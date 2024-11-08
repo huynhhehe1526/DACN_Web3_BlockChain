@@ -95,7 +95,15 @@ body {
                                 }
 
                                 &.submenu-item {
-                                    position: relative;
+                                    position   : relative;
+                                    display    : flex;
+                                    align-items: center;
+
+                                    .logo-nation {
+                                        width : 20%;
+                                        height: 20%;
+
+                                    }
 
                                     &:hover .sub-submenu {
                                         display: block;

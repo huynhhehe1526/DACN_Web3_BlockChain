@@ -1,0 +1,37 @@
+{
+    "header":{
+        "market": "Market",
+        "binance":"Binance",
+        "wallet":"Wallet",
+        "exchange":"Exchange",
+        "language":"Language",
+        "login":"Login"
+    },
+    "homepage":{
+        "title":"Build theme",
+        "description":"Frontend, backend, and onchain tools to build complete web3 apps on every EVM chain.",
+        "titleDetribute":"Distribution of Members"
+    },
+    "form":{
+        "signin":"Sign In"
+    },
+    "button":{
+        "singin":"Sign in",
+        "submit":"Submit",
+        "wallet":"Wallet",
+        "connectWallet":"Connect Wallet"
+    },
+    "input":{
+        "email":"Enter your email"
+    },
+   "footer":{
+        "generalInfor":"General",
+        "homepage":"Home page",
+        "introduce":"Introduce",
+        "regular":"Regular",
+        "address":"Address",
+        "followUs":"Follow Us",
+        "quickSingup":"Quick Singup",
+        "offerSignup":"Sign up to receive offers !"
+    }
+}

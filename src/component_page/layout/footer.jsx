@@ -1,10 +1,11 @@
 import React from "react";
 import '../scss/footer.scss';
 import { useNavigate } from 'react-router-dom';
-
+import { useTranslation } from "../../lang/LanguageProvider";
 
 
 const Footer = () => {
+    const {i18n} = useTranslation();
     const navigate = useNavigate();
     const redirectHomepage = () => {
         navigate('/');
@@ -14,19 +15,19 @@ const Footer = () => {
             <React.Fragment>
                 <div div className='footer-container' >
                     <div className='footer-left'>
-                        <h2>Thông tin chung</h2>
+                        <h2>{i18n.t('footer.generalInfor')}</h2>
                         <ul>
-                            <li><a onClick={() => redirectHomepage()}>Trang chủ</a></li>
-                            <li><a >Giới thiệu</a></li>
+                            <li><a onClick={() => redirectHomepage()}>{i18n.t('footer.homepage')}</a></li>
+                            <li><a >{i18n.t('footer.introduce')}</a></li>
                             <li>
                                 <a >
-                                    Quy định
+                                {i18n.t('footer.regular')}
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div className='footer-center'>
-                        <h2>Địa chỉ</h2>
+                        <h2>{i18n.t('footer.address')}</h2>
                         <ul>
                             <ul type="circle">
                                 <li>CNC</li>
@@ -36,7 +37,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className='footer-right'>
-                        <h2>Theo dõi</h2>
+                        <h2>{i18n.t('footer.followUs')}</h2>
                         <ul className="social">
                             <li>
                                 <i className="fab fa-facebook"></i>
@@ -49,11 +50,11 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="footer-extra">
-                        <h2>Đăng ký nhanh!</h2>
-                        <span style={{ fontWeight: 'Italic' }}>Đăng ký để nhận ưu đãi !</span>
+                        <h2>{i18n.t('footer.quickSingup')}</h2>
+                        <span style={{ fontWeight: 'Italic' }}>{i18n.t('footer.offerSignup')}</span>
                         <form>
-                            <input type="text" placeholder="Enter your email...." />
-                            <button type="submit">Submit</button>
+                            <input type="text" placeholder={`${i18n.t('input.email')}`}/>
+                            <button type="submit">{i18n.t('button.submit')} <i className="fa-solid fa-paper-plane" style={{color:'black'}}></i></button>
                         </form>
                     </div>
                 </div >
