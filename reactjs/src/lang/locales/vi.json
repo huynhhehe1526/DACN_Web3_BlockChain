@@ -1,0 +1,74 @@
+{
+    "header": {
+        "market": "Thị trường",
+        "binance": "Binance",
+        "wallet": "Ví điện tử",
+        "exchange": "Trao đổi",
+        "language": "Ngôn ngữ",
+        "login": "Đăng nhập",
+        "language_vi": "Tiếng Việt",
+        "language_en": "Tiếng Anh"
+    },
+    "homepage": {
+        "title": "Xây dựng chủ đề",
+        "description": "Các công cụ frontend, backend và onchain để xây dựng các ứng dụng web3 hoàn chỉnh trên mọi chuỗi EVM.",
+        "titleDetribute": "Sự đóng góp của các thành viên"
+    },
+    "form": {
+        "signin": "Đăng nhập",
+        "notice": "Bạn chưa có tài khoản?",
+        "title": "Chào mừng !",
+        "t_title": "Đến với trang web của chúng tôi.",
+        "subtitle": "Đăng nhập ngay để trải nghiệm nhá !!!",
+        "signup": "Đăng ký"
+    },
+    "checkbox": {
+        "rememberMe": "Ghi nhớ"
+    },
+    "label": {
+        "password": "Mật khẩu"
+    },
+    "button": {
+        "singin": "Đăng nhập",
+        "submit": "Gửi",
+        "wallet": "Ví điện tử",
+        "connectWallet": "Kết nối ví điện tử",
+        "deposit": "Gửi tiền",
+        "send": "Gửi",
+        "addCustomToken": "Thêm mã thông báo tùy chỉnh",
+        "addCurrency": "Thêm tiền tệ",
+        "showAddress": "Hiển thị địa chỉ",
+        "signup": "Đăng ký",
+        "forgotPass": "Quên mật khẩu"
+    },
+    "input": {
+        "email": "Nhập email"
+    },
+    "wallet": {
+        "wallet": "Ví điện tử",
+        "transaction": "Giao dịch",
+        "exchange": "Trao đổi",
+        "saving": "Khoản tiết kiệm",
+        "totalBalance": "Tổng số dư của bạn",
+        "forYou": "Dành cho bạn",
+        "yourAsset": "Tài khoản của bạn",
+        "backupWallet": "Vui lòng sao lưu ví của bạn",
+        "provideDex": "Cung cấp thanh khoản cho DEX của chúng tôi",
+        "tradeSwap": "Giao dịch SWAP trên uniswap"
+    },
+    "connectWalletModal": {
+        "title": "Kết nối ví",
+        "description": "Chọn ví bạn muốn kết nối. Nếu bạn chưa cài đặt ví, bạn có thể chọn một ví và được hướng dẫn cài đặt",
+        "warning": "Bằng cách kết nối ví, bạn đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của chúng tôi"
+    },
+    "footer": {
+        "generalInfor": "Thông tin chung",
+        "homepage": "Trang chủ",
+        "introduce": "Giới thiệu",
+        "regular": "Quy định",
+        "address": "Địa chỉ",
+        "followUs": "Theo dõi chúng tôi",
+        "quickSingup": "Đăng ký nhanh",
+        "offerSignup": "Đăng ký để nhận ưu đãi !"
+    }
+}

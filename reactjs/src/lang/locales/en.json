@@ -1,0 +1,74 @@
+{
+    "header": {
+        "market": "Market",
+        "binance": "Binance",
+        "wallet": "Wallet",
+        "exchange": "Exchange",
+        "language": "Language",
+        "login": "Login",
+        "language_vi": "VietNamese",
+        "language_en": "English"
+    },
+    "homepage": {
+        "title": "Build theme",
+        "description": "Frontend, backend, and onchain tools to build complete web3 apps on every EVM chain.",
+        "titleDetribute": "Distribution of Members"
+    },
+    "form": {
+        "signin": "Sign In",
+        "notice": "Don't have an account?",
+        "title": "Welcome !",
+        "t_title": "To Our New Website.",
+        "subtitle": "Log in now to experience it!!! !!!",
+        "signup": "Sign up"
+    },
+    "checkbox": {
+        "rememberMe": "Remember me"
+    },
+    "label": {
+        "password": "Password"
+    },
+    "button": {
+        "singin": "Sign in",
+        "submit": "Submit",
+        "wallet": "Wallet",
+        "connectWallet": "Connect Wallet",
+        "deposit": "Deposit",
+        "send": "Send",
+        "addCustomToken": "Add Custom Token",
+        "addCurrency": "Add Currency",
+        "showAddress": "Show Address",
+        "signup": "Sign up",
+        "forgotPass": "Forgot Password"
+    },
+    "input": {
+        "email": "Enter your email"
+    },
+    "wallet": {
+        "wallet": "Wallet",
+        "transaction": "Transaction",
+        "exchange": "Exchange",
+        "saving": "Saving",
+        "totalBalance": "Your total balance",
+        "forYou": "For you",
+        "yourAsset": "Your Assets",
+        "backupWallet": "Please backup your wallet",
+        "provideDex": "Provide liquidity to our DEX",
+        "tradeSwap": "Trade SWAP on uniswap"
+    },
+    "connectWalletModal": {
+        "title": "Connect Wallet",
+        "description": "Select the wallet you want to connect. If you don't have a wallet installed, you can choose one and be guided through the installation",
+        "warning": "By connecting your wallet, you agree to our Terms of Service and Privacy Policy"
+    },
+    "footer": {
+        "generalInfor": "General",
+        "homepage": "Home page",
+        "introduce": "Introduce",
+        "regular": "Regular",
+        "address": "Address",
+        "followUs": "Follow Us",
+        "quickSingup": "Quick Singup",
+        "offerSignup": "Sign up to receive offers !"
+    }
+}
