@@ -8,8 +8,6 @@ const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 8888;
-
-
 //config cors
 app.use(cors());
 
@@ -24,8 +22,6 @@ webAPI.get("/", getHomepage)
 //khai báo route
 app.use('/', webAPI);
 app.use('/api/', apiRoutes);
-
-
 
 (async () => {
     try {
