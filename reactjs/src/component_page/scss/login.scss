@@ -6,7 +6,6 @@ body {
     width  : 100%;
 }
 
-
 .login-container {
     font-family    : "Roboto Mono", monospace;
     position       : relative;
@@ -360,14 +359,11 @@ body {
     }
 }
 
-/* login.scss */
-
 .login-container {
     .form-box {
         .ant-form-item-label {
             label {
                 color      : #ffffff;
-                /* white color */
                 font-weight: bold;
             }
         }

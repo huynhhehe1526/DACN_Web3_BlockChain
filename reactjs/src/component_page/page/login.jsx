@@ -32,7 +32,6 @@ const LoginPage = () => {
 		}
 		console.log("Check data from function handleLogin: ", res)
 	};
-
 	return (
 		<>
 			<div className="login-container">
