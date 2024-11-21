@@ -15,9 +15,9 @@ import RegisterPage from './component_page/page/register.jsx'
 const router = [
   {
     layout: MainPlayout,
-    data:[
+    data: [
       {
-        path:'/',
+        path: '/',
         element: <HomePage />,
         showHeader: true, showFooter: true
       },
@@ -65,7 +65,7 @@ const router = [
         element: <BinancePage />,
         showHeader: true, showFooter: true
       }
-    ] 
+    ]
   }
 ];
 
