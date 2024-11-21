@@ -3,7 +3,6 @@ import '../scss/footer.scss';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "../../lang/LanguageProvider";
 
-
 const Footer = () => {
     const {i18n} = useTranslation();
     const navigate = useNavigate();
