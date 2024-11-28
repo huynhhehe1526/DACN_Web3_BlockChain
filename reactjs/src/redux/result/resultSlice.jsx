@@ -33,11 +33,16 @@ const initialState = {
     error: null,
     loading: false,
     previousWinner: null,
+    isShowNoticePublish: false,
 };
 const resultSlice = createSlice({
     name: 'result',
     initialState,
-    reducers: {},
+    reducers: {
+        setShowNoticePublish: (state, action) => {
+            state.isShowNoticePublish = action.payload; // Lưu trạng thái
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getResult.pending, (state) => {
@@ -69,5 +74,5 @@ const resultSlice = createSlice({
 
     },
 });
-
+export const { setShowNoticePublish } = resultSlice.actions;
 export default resultSlice.reducer;
