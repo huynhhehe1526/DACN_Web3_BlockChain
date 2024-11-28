@@ -9,10 +9,13 @@ import LanguageProvider from './lang/LanguageProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LanguageProvider>
-      <BrowserRouter>
+    <Provider store={store}>
+      <LanguageProvider>
+        <BrowserRouter>
           <App />
-      </BrowserRouter>
-    </LanguageProvider>
+        </BrowserRouter>
+      </LanguageProvider>
+    </Provider>
+
   </React.StrictMode>
 );

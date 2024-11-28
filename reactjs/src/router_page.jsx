@@ -36,7 +36,7 @@ const router = [
         element: <ContactPage />
       },
       {
-        path: "/form",
+        path: "/transaction",
         element: <Formjsonschema />,
         showHeader: true, showFooter: true
       },

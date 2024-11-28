@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import guessBitCoinReducer from '../redux/guessBitCoin/guessBitcoinSlice';
+import resultReducer from '../redux/result/resultSlice';
 
 const rootReducer = {
-
+  guessBitCoin: guessBitCoinReducer,
+  result: resultReducer
 };
 
 const store = configureStore({
