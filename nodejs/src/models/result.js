@@ -6,6 +6,7 @@ const resultSchema = new mongoose.Schema({
     actualPrice: Number,
     datePredicted: Date,
     canPublish: { type: Boolean, default: false },
+    jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', default: null },
     created_at: { type: Date, default: Date.now }
 });
 

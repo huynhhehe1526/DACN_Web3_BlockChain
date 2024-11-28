@@ -2,6 +2,7 @@ require("dotenv").config();
 const GuessBitcoin = require("../models/guess_bitcoin");
 const Result = require("../models/result");
 const Reward = require("../models/reward");
+const Job = require("../models/job");
 
 //rs cho hàm gethandleguess
 const handleguessBitcoinService = async (guessData) => {
@@ -464,6 +465,35 @@ const checkPreviousWinnerService = async (userId) => {
 };
 
 
+//select job
+
+const selectJobService = async (winnerId, jobId) => {
+    try {
+        let result;
+        if (jobId) {
+            const job = await Job.findById(jobId);
+            if (!job) {
+                throw new Error('Không tìm thấy công việc');
+            }
+
+            result = await Result.findOneAndUpdate(
+                { winnerId: winnerId },
+                { jobId: jobId },
+                { new: true, upsert: true }
+            );
+        } else {
+            result = await Result.findOneAndUpdate(
+                { winnerId: winnerId },
+                {},
+                { new: true, upsert: true }
+            );
+        }
+        return result;
+    } catch (error) {
+        throw new Error('Không thể chọn công việc: ' + error.message);
+    }
+};
+
 
 
 
@@ -471,5 +501,6 @@ module.exports = {
     handleguessBitcoinService,
     getResultWinnerService,
     getRewardService,
-    checkPreviousWinnerService
+    checkPreviousWinnerService,
+    selectJobService
 }

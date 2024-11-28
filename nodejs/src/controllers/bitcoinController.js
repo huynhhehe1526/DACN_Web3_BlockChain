@@ -1,6 +1,6 @@
 const { handleguessBitcoinService,
   getResultWinnerService, getRewardService,
-  checkPreviousWinnerService
+  checkPreviousWinnerService, selectJobService
 } = require("../services/bitcoinService")
 
 const actualPrice = 30000;
@@ -88,11 +88,20 @@ const getReward = async (req, res) => {
     }
   }
 };
-
+//select job
+const selectJob = async (req, res) => {
+  try {
+    const { winnerId, jobId } = req.body;  // Lấy thông tin từ request body
+    const result = await selectJobService(winnerId, jobId);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
 
 
 module.exports = {
   handleguessBitcoin, findWinner, getReward,
-  checkPreviousWinner
+  checkPreviousWinner, selectJob
 }

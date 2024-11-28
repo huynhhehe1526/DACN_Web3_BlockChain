@@ -11,6 +11,7 @@ import BinancePage from './component_page/page/binance.jsx';
 import MainPlayout from './component_page/layout/mainlayout.jsx';
 import ExchangePage from './component_page/page/exchange.jsx';
 import RegisterPage from './component_page/page/register.jsx'
+import JobChain from './component_page/page/job_chain.jsx'
 
 const router = [
   {
@@ -63,6 +64,11 @@ const router = [
       {
         path: "/binance",
         element: <BinancePage />,
+        showHeader: true, showFooter: true
+      },
+      {
+        path: "/jobchain",
+        element: <JobChain />,
         showHeader: true, showFooter: true
       }
     ]
