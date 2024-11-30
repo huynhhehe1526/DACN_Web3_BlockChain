@@ -89,7 +89,7 @@ const Header = () => {
                                 </li>
                             </ul>
                         </li>
-                        {loggedInUser ? (
+                        {/* {loggedInUser ? (
                             <li className="menu-item">
                                 <a>
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBbeAe-tJC8MFGPrUx5_fUvIBUasHxbO95Kw&s" alt="Profile" className="profile-logo" onClick={() => setShowProfileMenu(!showProfileMenu)} />
@@ -109,7 +109,7 @@ const Header = () => {
                                     <a onClick={redirectLogin}>{i18n.t('header.login')}</a>
                                 </li>
                             )
-                        }
+                        } */}
                     </ul>
                 </nav>
             </div>

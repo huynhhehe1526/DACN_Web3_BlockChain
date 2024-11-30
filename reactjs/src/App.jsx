@@ -5,20 +5,10 @@ import Header from "./component_page/layout/header";
 import Footer from './component_page/layout/footer';
 import axios from './util/axios';
 import { useEffect } from 'react';
-
 function App() {
-  useEffect(()=>{
-    const fetchHelloWord = async() =>{
-      const response = await axios.get(`/api`)
-      console.log("Check api helloword: ", response)
-    }
-
-    fetchHelloWord();
-  }, [])
   const location = useLocation();
   const route = routes.flatMap(routeGroup => routeGroup.data)
                       .find(route => route.path === location.pathname);
-
   const showHeader = route ? route.showHeader : true;  
   const showFooter = route ? route.showFooter : true;
   return (
@@ -36,10 +26,8 @@ function App() {
           ))}
         </Routes>
         {showFooter && <Footer />}
-    </>
-      
+    </> 
   );
 }
-
 export default App;
 

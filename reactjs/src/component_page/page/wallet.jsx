@@ -80,17 +80,20 @@ const WalletInterface = () => {
         console.log("Check totalBalance từ sessionStorage: ", total);
 
         if (showtotal === 0 && total) {
-          setShowToTal(total); // Set totalBalance only if it's 0
+          setShowToTal(total);
         }
       } catch (error) {
         console.error("Error parsing bitcoinInfo from sessionStorage:", error);
       }
     }
+
+
   }, [showtotal]);
   useEffect(() => {
     if (winner && winner.winner) {
       setNotificationCount(1);
     }
+
   }, [winner]);
 
 
@@ -165,7 +168,12 @@ const WalletInterface = () => {
 
   console.log("Check log bên wallet lấy ra state redux: ", totalBalance);
 
-
+  useEffect(() => {
+    if (winner && winner.winner && currentUserId === winner.winner.winnerId) {
+      // setNotificationCount(2);
+      setNotificationCount((prevCount) => prevCount + 1);
+    }
+  }, [winner, currentUserId]);
   //redux getresult
 
   const maskWinnerId = (winnerId) => {
@@ -174,39 +182,168 @@ const WalletInterface = () => {
     const maskedPart = "*".repeat(winnerId.length - 4);
     return `${maskedPart}${visiblePart}`;
   };
-
-
   const [notificationCount, setNotificationCount] = useState(0);
-
-
   const text = <span>Thông báo <hr sx={{ width: "10px" }} /></span>;
-  const content = (
-    <div style={{ height: '50px', margin: 0, padding: 0 }}>
-      {winner && winner.winner ?
-        <>
-          <span style={{ color: 'gray' }}>Ngày: {moment.utc(winner.winner.created_at).format("DD/MM/YYYY, HH:mm:ss")}</span>
-          <div style={{ display: "flex", gap: "5px", textAlign: 'justify', alignItems: 'center', justifyContent: 'flex-start' }}>
-            <i className="fa-solid fa-circle" style={{ color: "blue", fontSize: "5px" }}></i>
+  // const content = (
+  //   <div style={{ height: '50px', margin: 0, padding: 0 }}>
+  //     {winner && winner.winner ?
+  //       <>
+  //         <span style={{ color: 'gray' }}>Ngày: {moment.utc(winner.winner.created_at).format("DD/MM/YYYY, HH:mm:ss")}</span>
+  //         <div style={{ display: "flex", gap: "5px", textAlign: 'justify', alignItems: 'center', justifyContent: 'flex-start' }}>
+  //           <i className="fa-solid fa-circle" style={{ color: "blue", fontSize: "5px" }}></i>
 
-            <div div className='content-notice'>
+  //           <div div className='content-notice'>
+  //             Chúc mừng người dùng {maskWinnerId(`${winner.winner.winnerId}`)} chiến thắng
+  //           </div>
+  //         </div>
+  //       </>
+  //       :
+  //       <div div className='content-notice'>
+  //         Hiện chưa có thông báo mới
+  //       </div>
+  //     }
+  //   </div >
+
+  // );
+
+
+  const handleJobRedirect = () => {
+    navigate('/jobchain');
+  }
+
+  const content = (
+    <div style={{ margin: 0, padding: '10px', height: 'auto' }}>
+      {winner && winner.winner ? (
+        <>
+          <div style={{ marginBottom: '10px' }}>
+            <span style={{ color: 'gray', fontSize: '14px' }}>
+              Ngày: {moment.utc(winner.winner.created_at).format('DD/MM/YYYY, HH:mm:ss')}
+            </span>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              gap: '10px',
+              textAlign: 'left',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              marginBottom: '15px',
+            }}
+          >
+            <i className="fa-solid fa-circle" style={{ color: 'blue', fontSize: '8px' }}></i>
+            <div className="content-notice" style={{ fontSize: '14px' }}>
               Chúc mừng người dùng {maskWinnerId(`${winner.winner.winnerId}`)} chiến thắng
             </div>
           </div>
+
+          {currentUserId === winner.winner.winnerId && (
+            <div
+              style={{
+                display: 'flex',
+                gap: '10px',
+                textAlign: 'left',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                marginTop: '20px',
+                paddingTop: '10px',
+                borderTop: '1px solid #eee',
+              }}
+            >
+              <i className="fa-solid fa-circle" style={{ color: 'green', fontSize: '8px' }}></i>
+              <div className="content-notice" style={{ fontSize: '14px' }}>
+                Chúc mừng bạn nhận được job!
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ marginLeft: '5px', padding: '5px 15px', fontSize: '12px' }}
+                  onClick={handleJobRedirect}
+                >
+                  Xem Job
+                </Button>
+              </div>
+            </div>
+          )}
         </>
-        :
-        <div div className='content-notice'>
+      ) : (
+        <div className="content-notice" style={{ fontSize: '14px', color: 'gray' }}>
           Hiện chưa có thông báo mới
         </div>
-      }
-
-    </div >
+      )}
+    </div>
 
   );
+
+
+
+
+
+  // const content = (
+  //   <div style={{ margin: 0, padding: '10px', height: 'auto' }}>
+  //     {winner && winner.winner ? (
+  //       <>
+  //         <div style={{ marginBottom: '10px' }}>
+  //           <span style={{ color: 'gray', fontSize: '14px' }}>
+  //             Ngày: {moment.utc(winner.winner.created_at).format('DD/MM/YYYY, HH:mm:ss')}
+  //           </span>
+  //         </div>
+  //         <div
+  //           style={{
+  //             display: 'flex',
+  //             gap: '10px',
+  //             textAlign: 'left',
+  //             alignItems: 'center',
+  //             justifyContent: 'flex-start',
+  //             marginBottom: '15px',
+  //           }}
+  //         >
+  //           {/* Dấu chấm màu xanh dương */}
+  //           <i className="fa-solid fa-circle" style={{ color: 'blue', fontSize: '10px', lineHeight: '10px' }}></i>
+  //           <div className="content-notice" style={{ fontSize: '14px' }}>
+  //             Chúc mừng người dùng {maskWinnerId(`${winner.winner.winnerId}`)} chiến thắng
+  //           </div>
+  //         </div>
+
+  //         {currentUserId === winner.winner.winnerId && (
+  //           <div
+  //             style={{
+  //               display: 'flex',
+  //               gap: '10px',
+  //               textAlign: 'left',
+  //               alignItems: 'center',
+  //               justifyContent: 'flex-start',
+  //               marginTop: '20px',
+  //               paddingTop: '10px',
+  //               borderTop: '1px solid #eee',
+  //             }}
+  //           >
+  //             {/* Dấu chấm màu xanh lá */}
+  //             <i className="fa-solid fa-circle" style={{ color: 'green', fontSize: '10px', lineHeight: '10px' }}></i>
+  //             <div className="content-notice" style={{ fontSize: '14px' }}>
+  //               Chúc mừng bạn nhận được job!
+  //               <Button
+  //                 variant="contained"
+  //                 color="primary"
+  //                 sx={{ marginLeft: '10px', padding: '5px 15px', fontSize: '12px' }}
+  //               // onClick={handleJobRedirect} // Cái này sẽ cần một handler cho việc chuyển hướng hoặc hành động gì đó khi nhấn vào "Xem job"
+  //               >
+  //                 Xem Job
+  //               </Button>
+  //             </div>
+  //           </div>
+  //         )}
+  //       </>
+  //     ) : (
+  //       <div className="content-notice" style={{ fontSize: '14px', color: 'gray' }}>
+  //         Hiện chưa có thông báo mới
+  //       </div>
+  //     )}
+  //   </div>
+  // );
+
+
+
+
   const buttonWidth = 80;
-
-
-
-
   return (
     <Box sx={{ minHeight: '100vh' }}>
       {/* Navigation Bar */}
@@ -286,7 +423,7 @@ const WalletInterface = () => {
 
                     {/* Thêm nút công bố nếu người dùng là người chiến thắng hôm qua */}
                     {isWinner && (
-                      <Button variant="contained" color="primary" onClick={handleClickCongBo}>
+                      <Button variant="contained" color="primary" sx={{ ml: 10 }} onClick={handleClickCongBo}>
                         Công bố
                       </Button>
                     )}
@@ -380,7 +517,7 @@ const WalletInterface = () => {
                     </Box>
                     <Box sx={{ textAlign: 'right' }}>
                       <Typography> BTC</Typography>
-                      <Typography color="textSecondary">0 USD</Typography>
+                      <Typography color="textSecondary">{showtotal} USD</Typography>
                     </Box>
                   </Box>
                 </CardContent>

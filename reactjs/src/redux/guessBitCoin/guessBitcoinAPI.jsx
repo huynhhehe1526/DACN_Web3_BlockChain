@@ -7,11 +7,8 @@ const postGuessBitCoin = async (formData) => {
     }
     return response;
 };
-
-
 const guessBitcoinAPI = {
     postGuessBitCoin
 
 };
-
 export default guessBitcoinAPI;

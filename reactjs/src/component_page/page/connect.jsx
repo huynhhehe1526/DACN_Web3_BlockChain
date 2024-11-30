@@ -237,51 +237,16 @@ const ConnectWalletModal = ({ open, onClose }) => {
     }
   };
   const dispatch = useDispatch();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log('Ví bitcoin:', bitcoin_wallet);
-  //   console.log('Tài khoản ngân hàng:', bank_account);
-
-  //   const data = { bitcoin_wallet, bank_account };
-
-  //   try {
-  //     const res = await savePriceGuess(data);
-  //     if (res) {
-  //       if (res.data) {
-  //         setDtWallet(res.data);
-
-  //         notification.success({
-  //           message: res.message,
-  //           description: "Success"
-  //         })
-  //       } else {
-  //         notification.success({
-  //           message: res.message,
-  //           description: "Info"
-  //         })
-  //       }
-
-
-  //     }
-
-  //   } catch (error) {
-  //     console.error("Error while saving price guess:", error);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { bitcoin_wallet, bank_account };
     console.log("Check data: ", data);
-    // 
-
     try {
       setConnecting(true);
       const res = await dispatch(postGuessBitCoin(data)).unwrap();
       if (res) {
         if (res.data) {
           setDtWallet(res.data);
-
           notification.success({
             message: res.message,
             description: "Success"
@@ -292,7 +257,6 @@ const ConnectWalletModal = ({ open, onClose }) => {
           message: res.message,
           description: "Info"
         })
-
       }
     } catch (error) {
       notification.error({
@@ -303,7 +267,6 @@ const ConnectWalletModal = ({ open, onClose }) => {
       setConnecting(false);
     }
   };
-
   console.log('Check res handleSubmit ở connect:', dtWallet);
 
   if (!open) return null;
