@@ -207,7 +207,10 @@ const WalletInterface = () => {
   const buttonWidth = 80;
 
 
-
+  const handleCreateClick = () => {
+    navigate('/create');  // Điều hướng đến trang Create
+  };
+  
 
   return (
     <div>
@@ -304,6 +307,16 @@ const WalletInterface = () => {
               <IconButton>
                 <DarkMode />
               </IconButton>
+            </Box>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleCreateClick}
+              sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+            >
+              Create
+            </Button>
             </Box>
           </Box>
         </Container>
