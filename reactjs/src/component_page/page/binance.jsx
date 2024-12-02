@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 const BinancePage = () => {
     return (
         <div>

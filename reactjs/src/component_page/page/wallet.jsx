@@ -13,7 +13,6 @@ import {
   Button,
   Card,
   CardContent,
-  colors,
   Container,
   Grid,
   IconButton,
@@ -21,16 +20,19 @@ import {
   Tabs,
   Typography
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
-import ConnectWalletModal from '../page/connect';
-import { useTranslation } from '../../lang/LanguageProvider';
-import { useSelector } from 'react-redux';
-import { postGuessBitCoin } from '../../redux/guessBitCoin/guessBitcoinSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Button as AntButton, ConfigProvider, Flex, notification, Popover } from 'antd';
-import { getResult, checkWinnerPrevious } from '../../redux/result/resultSlice';
+import { ConfigProvider, Flex, Popover } from 'antd';
 import moment from "moment";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../lang/LanguageProvider';
+import { checkWinnerPrevious, getResult } from '../../redux/result/resultSlice';
+import Header from "../layout/header";
+import ConnectWalletModal from '../page/connect';
+
+
+
+
 const WalletInterface = () => {
   const { i18n } = useTranslation();
 
@@ -208,6 +210,8 @@ const WalletInterface = () => {
 
 
   return (
+    <div>
+      <Header/>
     <Box sx={{ minHeight: '100vh' }}>
       {/* Navigation Bar */}
       <AppBar position="static" color="transparent" elevation={0}>
@@ -397,6 +401,7 @@ const WalletInterface = () => {
         </Grid>
       </Container>
     </Box>
+    </div>
   );
 };
 

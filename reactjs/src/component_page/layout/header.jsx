@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import '../scss/header.scss';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo_VietNam from '../../assets/image/logo_VietNam.png';
 import logo_nuocAnh from '../../assets/image/logo_nuocAnh.png';
 import { useTranslation } from '../../lang/LanguageProvider';
-import { useEffect } from 'react';
+import '../scss/header.scss';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ const Header = () => {
         navigate("/market")
     }
     const redirectBinance = () => {
-        navigate("/binance")
+        navigate("/minigames")
     }
 
     const redirectWallet = () => {

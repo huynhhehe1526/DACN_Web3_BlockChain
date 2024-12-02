@@ -3,6 +3,17 @@ const GuessBitcoin = require("../models/guess_bitcoin");
 const Result = require("../models/result");
 const Reward = require("../models/reward");
 const Job = require("../models/job");
+var CryptoJS = require("crypto-js");
+
+// const generateRandomString = (length) => {
+//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//     let result = '';
+//     for (let i = 0; i < length; i++) {
+//         result += characters.charAt(Math.floor(Math.random() * characters.length));
+//     }
+//     return result;
+// };
+
 
 //rs cho hàm gethandleguess
 const handleguessBitcoinService = async (guessData) => {
@@ -110,6 +121,128 @@ const handleguessBitcoinService = async (guessData) => {
         return { error: 500, message: "Internal Server Error" };
     }
 };
+
+
+const hashWallet = (wallet) => {
+    return CryptoJS.SHA256(wallet).toString(CryptoJS.enc.Base64);
+};
+
+//rs cho việc chuyển đổi bitcoin sang 12 ký tụ
+// const handleguessBitcoinService = async (guessData) => {
+//     try {
+//         if (!guessData || !guessData.bitcoin_wallet || !guessData.bank_account) {
+//             return {
+//                 error: 1,
+//                 message: "Vui lòng cung cấp đầy đủ thông tin ví và tài khoản ngân hàng"
+//             };
+//         }
+//         else {
+//             const encryptedBitcoinWallet = hashWallet(guessData.bitcoin_wallet);
+//             console.log("Check encrypt: bitcoin_wallet : ", encryptedBitcoinWallet)
+//             const filter = {
+//                 bitcoin_wallet: encryptedBitcoinWallet,
+//                 bank_account: guessData.bank_account,
+//             };
+//             const existingRecord = await GuessBitcoin.findOne(filter);
+//             console.log("Check dữ liệu đã tồn tại: ", existingRecord);
+//             console.log("Check bitcoin_wallet encrypt: ", encryptedBitcoinWallet);
+//             if (existingRecord) {
+//                 if (existingRecord.bitcoin_wallet === encryptedBitcoinWallet && existingRecord.bank_account === guessData.bank_account) {
+//                     if (!guessData.bitcoin && !guessData.predicted_price) {
+//                         return {
+//                             message: "Ví đã kết nối",
+//                             totalBalance: existingRecord.totalBalance,
+//                             data: existingRecord,
+//                         };
+//                     }
+//                     const bitcoin = Number(guessData.bitcoin);
+//                     const predictedPrice = Number(guessData.predicted_price);
+//                     if (isNaN(bitcoin) || isNaN(predictedPrice)) {
+//                         return {
+//                             error: 400,
+//                             message: "Giá trị bitcoin hoặc predicted_price không hợp lệ",
+//                             dulieumoi: guessData,
+//                         };
+//                     }
+//                     const isDuplicate = existingRecord.bitcoin === bitcoin && existingRecord.predicted_price === predictedPrice;
+//                     if (isDuplicate) {
+//                         return {
+//                             error: 1,
+//                             message: "Dữ liệu đã tồn tại",
+//                             data: existingRecord,
+//                             dulieumoi: guessData,
+//                         };
+//                     } else {
+//                         if (
+//                             (existingRecord.bitcoin === 0 && existingRecord.predicted_price === 0) ||
+//                             existingRecord.bitcoin !== bitcoin ||
+//                             existingRecord.predicted_price !== predictedPrice
+//                         ) {
+//                             if (bitcoin > existingRecord.totalBalance) {
+//                                 return {
+//                                     error: 2,
+//                                     message: "Số dư không đủ",
+//                                     data: existingRecord,
+//                                     dulieumoi: guessData,
+//                                 };
+//                             }
+//                             existingRecord.bitcoin += bitcoin;
+//                             existingRecord.predicted_price = predictedPrice;
+//                             existingRecord.totalBalance -= bitcoin;
+//                             const gmt7Date = new Date();
+//                             gmt7Date.setHours(gmt7Date.getHours() + 7);
+//                             existingRecord.created_at = gmt7Date;
+//                             await existingRecord.save();
+//                             return {
+//                                 message: "Cập nhật thành công",
+//                                 data: existingRecord,
+//                                 dulieumoi: guessData,
+//                             };
+//                         }
+//                     }
+//                 }
+//             } else {
+//                 const randomTotalBalance =
+//                     Math.floor(Math.random() * (9000000000 - 10000 + 1)) + 10000;
+
+//                 const bitcoin = Number(guessData.bitcoin || 0);
+//                 const predictedPrice = Number(guessData.predicted_price || 0);
+
+//                 // Tạo thời gian GMT+7
+//                 const gmt7Date = new Date();
+//                 gmt7Date.setHours(gmt7Date.getHours() + 7);
+
+//                 const newGuess = new GuessBitcoin({
+//                     bitcoin_wallet: encryptedBitcoinWallet,
+//                     bank_account: guessData.bank_account,
+//                     bitcoin: bitcoin,
+//                     predicted_price: predictedPrice,
+//                     totalBalance: randomTotalBalance,
+//                     created_at: gmt7Date,
+//                 });
+
+//                 await newGuess.save();
+
+//                 return {
+//                     message: "Tạo mới thành công",
+//                     totalBalance: randomTotalBalance,
+//                     data: newGuess,
+//                 };
+//             }
+//         }
+//         // Mã hóa bitcoin_wallet và bank_account trước khi lưu trữ
+
+//     } catch (error) {
+//         console.log("Check error handleguessBitcoinService:", error);
+//         return { error: 500, message: "Internal Server Error" };
+//     }
+// };
+
+
+
+
+
+
 
 
 
@@ -285,8 +418,6 @@ const getResultWinnerService = async (actualPrice, deviationThreshold, limit) =>
             });
 
             await saveResult.save();
-
-            // Cập nhật canPublish của cho người chiến thắng hôm qua
             const previousDate = new Date(currentDate);
             previousDate.setDate(previousDate.getDate() - 1);
 
@@ -324,16 +455,13 @@ const getRewardService = async (winnerId) => {
 
         console.log("Check lấy thông tin người chiến thắng để nhận thưởng: ", findWinner_Reward);
         console.log("Check lấy thông tin số bitcoin đầu tư: ", invest_bitcoin.bitcoin);
-
         if (!findWinner_Reward || !invest_bitcoin) {
             throw new Error("Không tìm thấy thông tin người chiến thắng hoặc dữ liệu dự đoán bitcoin.");
         }
-
         const existingReward = await Reward.findOne({ winnerId: winnerId });
         if (existingReward) {
             return { rewardAmount: existingReward.reward_balance };
         }
-
         let rewardPercentage = 0;
         let rewardAmount = 0;
         if (findWinner_Reward.deviation >= 900 && findWinner_Reward.deviation <= 1000) {
@@ -347,21 +475,17 @@ const getRewardService = async (winnerId) => {
         } else {
             rewardPercentage = 0.40;
         }
-
         rewardAmount = invest_bitcoin.bitcoin * rewardPercentage;
-
         const winnerId_reward = new Reward({
             winnerId: findWinner_Reward.winnerId,
             reward_balance: rewardAmount,
             status: true
         });
         await winnerId_reward.save();
-
         await GuessBitcoin.updateOne(
             { _id: winnerId },
             { $inc: { totalBalance: rewardAmount } }
         );
-
         return { rewardAmount };
     } catch (error) {
         throw new Error(error.message || "Lỗi khi cập nhật phần thưởng!");
