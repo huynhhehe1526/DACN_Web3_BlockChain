@@ -17,4 +17,3 @@ guessBitcoinSchema.index({ bitcoin_wallet: 1, bank_account: 1 }, { unique: true 
 const GuessBitcoin = mongoose.model('GuessBitcoin', guessBitcoinSchema);
 
 module.exports = GuessBitcoin;
-    
