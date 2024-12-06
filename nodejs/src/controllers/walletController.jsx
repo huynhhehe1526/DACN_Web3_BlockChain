@@ -21,6 +21,8 @@ exports.createWallet = async (req, res) => {
             bank_account,
             mnemonic,
             totalBalance: randomTotalBalance,
+            
+
             // Không thêm wallet_status
         });
 

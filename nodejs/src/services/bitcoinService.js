@@ -447,50 +447,134 @@ const getResultWinnerService = async (actualPrice, deviationThreshold, limit) =>
     }
 };
 
+//gốc nè
+// const getRewardService = async (winnerId) => {
+//     try {
+//         const findWinner_Reward = await Result.findOne({ winnerId: winnerId });
+//         const invest_bitcoin = await GuessBitcoin.findOne({ _id: winnerId });
 
-const getRewardService = async (winnerId) => {
+//         console.log("Check lấy thông tin người chiến thắng để nhận thưởng: ", findWinner_Reward);
+//         console.log("Check lấy thông tin số bitcoin đầu tư: ", invest_bitcoin.bitcoin);
+//         if (!findWinner_Reward || !invest_bitcoin) {
+//             throw new Error("Không tìm thấy thông tin người chiến thắng hoặc dữ liệu dự đoán bitcoin.");
+//         }
+//         const existingReward = await Reward.findOne({ winnerId: winnerId });
+//         if (existingReward) {
+//             return { rewardAmount: existingReward.reward_balance };
+//         }
+//         let rewardPercentage = 0;
+//         let rewardAmount = 0;
+//         if (findWinner_Reward.deviation >= 900 && findWinner_Reward.deviation <= 1000) {
+//             rewardPercentage = 0.10; // 10% => between 900-1000
+//         } else if (findWinner_Reward.deviation >= 700 && findWinner_Reward.deviation <= 800) {
+//             rewardPercentage = 0.15; // 15% => between 700-800
+//         } else if (findWinner_Reward.deviation >= 400 && findWinner_Reward.deviation <= 600) {
+//             rewardPercentage = 0.20; // 20% => between 400-600
+//         } else if (findWinner_Reward.deviation >= 100 && findWinner_Reward.deviation <= 300) {
+//             rewardPercentage = 0.30; // 30% => between 100-300
+//         } else {
+//             rewardPercentage = 0.40;
+//         }
+//         rewardAmount = invest_bitcoin.bitcoin * rewardPercentage;
+//         const winnerId_reward = new Reward({
+//             winnerId: findWinner_Reward.winnerId,
+//             reward_balance: rewardAmount,
+//             status: true
+//         });
+//         await winnerId_reward.save();
+//         await GuessBitcoin.updateOne(
+//             { _id: winnerId },
+//             { $inc: { totalBalance: rewardAmount } }
+//         );
+//         return { rewardAmount };
+//     } catch (error) {
+//         throw new Error(error.message || "Lỗi khi cập nhật phần thưởng!");
+//     }
+// };
+
+
+
+
+
+//chỉnh sửa get reward + job
+
+const getRewardService = async (winnerId, jobId, answer) => {
     try {
-        const findWinner_Reward = await Result.findOne({ winnerId: winnerId });
+        // Tìm thông tin người chiến thắng
+        const findWinner_Reward = await Result.findOne({ winnerId });
         const invest_bitcoin = await GuessBitcoin.findOne({ _id: winnerId });
 
-        console.log("Check lấy thông tin người chiến thắng để nhận thưởng: ", findWinner_Reward);
-        console.log("Check lấy thông tin số bitcoin đầu tư: ", invest_bitcoin.bitcoin);
         if (!findWinner_Reward || !invest_bitcoin) {
-            throw new Error("Không tìm thấy thông tin người chiến thắng hoặc dữ liệu dự đoán bitcoin.");
+            return { error: 1, message: "Không tìm thấy thông tin người chiến thắng hoặc dữ liệu dự đoán bitcoin." };
         }
-        const existingReward = await Reward.findOne({ winnerId: winnerId });
-        if (existingReward) {
-            return { rewardAmount: existingReward.reward_balance };
+
+        // Tìm công việc và kiểm tra trạng thái công việc
+        const job = await Job.findOne({ _id: jobId });
+        if (!job) return { error: 2, message: "Không tìm thấy công việc." };
+        if (job.isCompleted) return { error: 3, message: "Công việc này đã hoàn thành." };
+
+        // **Kiểm tra điều kiện trả lời đúng câu hỏi**
+        let additionalReward = 0;
+        if (job.correctAnswer.toLowerCase() === answer.toLowerCase()) {
+            additionalReward = job.rewardAmount;
+
+            // Cập nhật trạng thái công việc là đã hoàn thành
+            job.isCompleted = true;
+            await job.save();
+
+            // Lưu thông tin jobId và trạng thái isComplete vào Result
+            findWinner_Reward.jobId = jobId;
+            findWinner_Reward.isCompleted = true;
+            await findWinner_Reward.save();
+
+        } else {
+            return { error: 4, message: "Trả lời không chính xác, không được nhận thưởng." };
         }
+
+        // Tính phần thưởng cơ bản dựa vào phần trăm lệch dự đoán Bitcoin
         let rewardPercentage = 0;
-        let rewardAmount = 0;
+
         if (findWinner_Reward.deviation >= 900 && findWinner_Reward.deviation <= 1000) {
-            rewardPercentage = 0.10; // 10% => between 900-1000
+            rewardPercentage = 0.10;
         } else if (findWinner_Reward.deviation >= 700 && findWinner_Reward.deviation <= 800) {
-            rewardPercentage = 0.15; // 15% => between 700-800
+            rewardPercentage = 0.15;
         } else if (findWinner_Reward.deviation >= 400 && findWinner_Reward.deviation <= 600) {
-            rewardPercentage = 0.20; // 20% => between 400-600
+            rewardPercentage = 0.20;
         } else if (findWinner_Reward.deviation >= 100 && findWinner_Reward.deviation <= 300) {
-            rewardPercentage = 0.30; // 30% => between 100-300
+            rewardPercentage = 0.30;
         } else {
             rewardPercentage = 0.40;
         }
-        rewardAmount = invest_bitcoin.bitcoin * rewardPercentage;
-        const winnerId_reward = new Reward({
-            winnerId: findWinner_Reward.winnerId,
-            reward_balance: rewardAmount,
-            status: true
-        });
-        await winnerId_reward.save();
+
+        const rewardAmount = invest_bitcoin.bitcoin * rewardPercentage + additionalReward;
+
+        // Cập nhật Reward
+        const existingReward = await Reward.findOne({ winnerId });
+        if (existingReward) {
+            existingReward.reward_balance += rewardAmount;
+            existingReward.status = true;
+            await existingReward.save();
+        } else {
+            const newReward = new Reward({
+                winnerId: findWinner_Reward.winnerId,
+                reward_balance: rewardAmount,
+                status: true,
+            });
+            await newReward.save();
+        }
+
+        // Cộng tổng số dư người chơi
         await GuessBitcoin.updateOne(
             { _id: winnerId },
             { $inc: { totalBalance: rewardAmount } }
         );
-        return { rewardAmount };
+
+        return { error: 0, message: "Phần thưởng đã được cập nhật thành công!", rewardAmount };
     } catch (error) {
-        throw new Error(error.message || "Lỗi khi cập nhật phần thưởng!");
+        return { error: -1, message: error.message || "Lỗi khi cập nhật phần thưởng!" };
     }
 };
+
 
 
 //gốc

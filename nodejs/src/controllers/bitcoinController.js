@@ -59,28 +59,66 @@ const findWinner = async (req, res) => {
 };
 
 
+//gốc
+// const getReward = async (req, res) => {
+//   try {
+//     const winner = await getResultWinnerService(actualPrice, deviationThreshold, limit);
+//     console.log("Check id winner:", winner);
+//     const currentDate = new Date();
+//     console.log("Check current date getReward: ", currentDate);
 
+//     if (!winner.winnerId) {
+//       return res.status(400).send({
+//         error: "Không tìm thấy người chiến thắng!",
+//       });
+//     }
+
+//     const rewardResult = await getRewardService(winner.winnerId);
+
+//     return res.status(200).send({
+//       message: `Phần thưởng đã được trao! Chúc mừng bạn nhận được ${rewardResult.rewardAmount} USD vào tài khoản!`,
+//       user: rewardResult,
+//     });
+//   } catch (error) {
+//     console.error("Lỗi trong hàm getReward: ", error);
+//     if (!res.headersSent) {
+//       return res.status(500).send({
+//         error: error.message || "Lỗi khi trao thưởng!",
+//       });
+//     }
+//   }
+// };
+
+
+//chỉnh sửa
 const getReward = async (req, res) => {
   try {
+    const { actualPrice, deviationThreshold, limit, jobId, answer } = req.body; // Lấy dữ liệu từ body request
+
+    // Lấy thông tin người chiến thắng
     const winner = await getResultWinnerService(actualPrice, deviationThreshold, limit);
     console.log("Check id winner:", winner);
     const currentDate = new Date();
     console.log("Check current date getReward: ", currentDate);
 
-    if (!winner.winnerId) {
-      return res.status(400).send({
+    // Kiểm tra xem có người chiến thắng không
+    if (!winner || !winner.winnerId) {
+      return res.status(404).send({
         error: "Không tìm thấy người chiến thắng!",
       });
     }
 
-    const rewardResult = await getRewardService(winner.winnerId);
+    // Trao thưởng cho người chiến thắng
+    const rewardResult = await getRewardService(winner.winnerId, jobId, answer);
 
     return res.status(200).send({
-      message: `Phần thưởng đã được trao! Chúc mừng bạn nhận được ${rewardResult.rewardAmount} USD vào tài khoản!`,
-      user: rewardResult,
+      // message: `Phần thưởng đã được trao! Chúc mừng bạn nhận được ${rewardResult.rewardAmount} USD (bao gồm ${rewardResult.additionalReward} USD từ câu trả lời đúng) vào tài khoản!`,
+      rewardDetails: rewardResult,
     });
   } catch (error) {
     console.error("Lỗi trong hàm getReward: ", error);
+
+    // Xử lý lỗi chung và đảm bảo không bị lỗi gửi lại response nhiều lần
     if (!res.headersSent) {
       return res.status(500).send({
         error: error.message || "Lỗi khi trao thưởng!",
@@ -88,6 +126,8 @@ const getReward = async (req, res) => {
     }
   }
 };
+
+
 //select job
 const selectJob = async (req, res) => {
   try {

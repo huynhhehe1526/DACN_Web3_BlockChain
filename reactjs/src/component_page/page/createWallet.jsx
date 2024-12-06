@@ -21,8 +21,9 @@ const CreateWallet = () => {
     try {
       const response = await axios.post('http://localhost:8080/api/create_wallet', { bank_account: name }); // Đổi API_ENDPOINT thành URL thực tế
       setSuccess(true);
-      console.log('Tạo ví thành công:', response.data);
-      setTimeout(() => navigate('/wallet'), 2000); // Điều hướng sau 2 giây
+      console.log('Tạo ví thành công:', response.data.wallet);
+      sessionStorage.setItem('bitcoinInfo', JSON.stringify(response.data.wallet));
+      setTimeout(() => navigate('/wallets'), 2000); // Điều hướng sau 2 giây
     } catch (error) {
       setError('Lỗi tạo ví, vui lòng thử lại!');
       console.error('Error creating wallet:', error);
@@ -46,7 +47,22 @@ const CreateWallet = () => {
           sx={{ mt: 2 }}
           error={Boolean(error)}
           helperText={error}
+          InputProps={{
+            sx: {
+              color: 'white',
+              '& input': {
+                color: 'white',
+              },
+              '& label': {
+                color: 'white',
+              },
+              '& .MuiFormHelperText-root': {
+                color: 'white',
+              },
+            },
+          }}
         />
+
 
         <Button
           variant="contained"
