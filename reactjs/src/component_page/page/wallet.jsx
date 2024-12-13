@@ -209,7 +209,7 @@ const WalletInterface = () => {
           },
         }
       );
-      
+
       if (response.data && response.data.length > 0) {
         setBtcPrice(response.data[0].current_price);
       }
@@ -223,7 +223,7 @@ const WalletInterface = () => {
   // Fetch Bitcoin price on component mount and set up periodic updates
   useEffect(() => {
     fetchBitcoinPrice();
-    
+
     // Update price every 10 seconds
     const intervalId = setInterval(fetchBitcoinPrice, 10000);
 
@@ -236,8 +236,8 @@ const WalletInterface = () => {
   };
 
   // Determine the displayed total based on selected tab
-  const displayTotal = value === 'usd' 
-    ? convertBtcToUsd(showtotal) 
+  const displayTotal = value === 'usd'
+    ? convertBtcToUsd(showtotal)
     : showtotal;
 
   // Determine the currency symbol
@@ -357,6 +357,7 @@ const WalletInterface = () => {
                       align="center"
                       style={{
                         whiteSpace: 'nowrap',
+                        gap: '20px'
                       }}
                     >
                       {/* <Popover placement="bottom" title={text} content={content}>
@@ -507,13 +508,13 @@ const WalletInterface = () => {
                           {value === 'btc' ? 'BTC' : 'USD'}
                         </Typography>
                         <Typography color="textSecondary">
-                          {value === 'btc' 
-                            ? `${showtotal} BTC` 
+                          {value === 'btc'
+                            ? `${showtotal} BTC`
                             : `${convertBtcToUsd(showtotal)} USD`}
                         </Typography>
                         {value === 'usd' && (
                           <Typography variant="body2" color="textSecondary">
-                            @ ${btcPrice.toLocaleString()} per BTC
+                            ${btcPrice.toLocaleString()} per BTC
                           </Typography>
                         )}
                       </Box>

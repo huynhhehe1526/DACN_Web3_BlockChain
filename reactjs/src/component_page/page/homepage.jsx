@@ -6,9 +6,12 @@ import shopify from '../../assets/image/shopify.png';
 import ztx from '../../assets/image/ztx.png';
 import { useTranslation } from '../../lang/LanguageProvider';
 import '../scss/homepage.scss';
+import Quan from '../../assets/image/Quan.jpg';
+import Huynh from '../../assets/image/Huynh.jpg';
+import Quang from '../../assets/image/Quang.jpg';
 
 const HomePage = () => {
-    const {i18n}  =useTranslation();
+    const { i18n } = useTranslation();
     const navigate = useNavigate();
     const redirectWallet = () => {
         navigate("/wallets")
@@ -83,7 +86,7 @@ const HomePage = () => {
                 <h2>{i18n.t('homepage.titleDetribute')}</h2>
                 <div className="css-1wg1opb">
                     <div className="chakra-linkbox css-uth939">
-                        <img alt="" src="D:\download\Đồ Án Tốt Nghiệp\DACN_Web3_BlockChain\reactjs\src\assets\image\Quân.jpg"
+                        <img alt="" src={Quan}
                             className="chakra-image css-4zb3ge" />
                         <div className="css-ygyttu">
                             <div className="css-0">
@@ -101,7 +104,7 @@ const HomePage = () => {
                         </div>
                     </div>
                     <div className="chakra-linkbox css-5or9b3">
-                        <img alt="" src="D:\download\Đồ Án Tốt Nghiệp\DACN_Web3_BlockChain\reactjs\src\assets\image\Huỳnh.jpg"
+                        <img alt="" src={Huynh}
                             className="chakra-image css-4zb3ge" />
                         <div className="css-ygyttu">
                             <div className="css-0">
@@ -118,7 +121,7 @@ const HomePage = () => {
                     </div>
                     <div className="chakra-linkbox css-5or9b3">
                         <img alt=""
-                            src="D:\download\Đồ Án Tốt Nghiệp\DACN_Web3_BlockChain\reactjs\src\assets\image\Quảng.jpg"
+                            src={Quang}
                             className="chakra-image css-4zb3ge" />
                         <div className="css-ygyttu">
                             <div className="css-0">
