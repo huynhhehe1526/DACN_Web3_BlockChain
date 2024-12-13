@@ -216,7 +216,7 @@ const WalletInterface = () => {
     } catch (error) {
       console.error("Error fetching Bitcoin price:", error);
       // Fallback to a default price if API fails
-      setBtcPrice(50000);
+      setBtcPrice(100000);
     }
   };
 

@@ -1,5 +1,5 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import guessBitcoinAPI from './guessBitcoinAPI';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 
 export const postGuessBitCoin = createAsyncThunk(
@@ -36,7 +36,7 @@ const guessBitcoinSlice = createSlice({
                 state.loading = false;
                 state.totalBalance = action.payload.totalBalance;
                 state.bitcoinData = action.payload.data.data;
-                state.error = action.payload.data.message;
+                state.error = null;
             })
             .addCase(postGuessBitCoin.rejected, (state, action) => {
                 state.loading = false;

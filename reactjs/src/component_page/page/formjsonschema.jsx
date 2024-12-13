@@ -179,11 +179,11 @@
 //rs
 
 import Form from '@rjsf/core';
-import { useState, useEffect } from 'react';
 import validator from '@rjsf/validator-ajv8';
-import { postGuessBitCoin } from '../../redux/guessBitCoin/guessBitcoinSlice';
-import { useDispatch } from 'react-redux';
 import { notification } from 'antd'; // Giả sử bạn sử dụng Ant Design để hiển thị thông báo
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { postGuessBitCoin } from '../../redux/guessBitCoin/guessBitcoinSlice';
 
 const schema = {
     title: "Nhập thông tin Bitcoin",
