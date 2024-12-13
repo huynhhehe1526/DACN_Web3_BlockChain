@@ -63,15 +63,15 @@ const Header = () => {
                         <li className="menu-item">
                             <a onClick={redirectMarket}>{i18n.t('header.market')}</a>
                         </li>
-                        <li className="menu-item">
+                        {/* <li className="menu-item">
                             <a onClick={redirectBinance}>{i18n.t('header.binance')}</a>
-                        </li>
+                        </li> */}
                         <li className="menu-item">
                             <a onClick={redirectWallet}>{i18n.t('header.wallet')}</a>
                         </li>
-                        <li className="menu-item">
+                        {/* <li className="menu-item">
                             <a onClick={redirectExchange}>{i18n.t('header.exchange')}</a>
-                        </li>
+                        </li> */}
                         <li className="menu-item">
                             <a href="#">{i18n.t('header.language')}</a>
                             <ul className="submenu">
